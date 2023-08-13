@@ -1,0 +1,64 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumpy skin disease detection</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}">
+</head>
+
+<body>
+    <div style="display: flex; justify-content: center;">
+        <h1>Lumpy skin disease detection in cattles</h1>
+    </div>
+    <div class="container">
+        <img src="static\Images\cow.png" alt="Cow logo" style="height: 12%; width: 6%;">
+        <div class="form-div">
+            <form action="/" method="post" enctype="multipart/form-data">
+                <label for="image">Image:</label>
+                <input type="file" name="image">
+                <br><br>
+                <button type="submit" onclick="disp()">Predict</button>
+            </form>
+        </div>
+        <div>
+            {%if image_filename %}
+            <img src="{{url_for('static',filename=image_filename)}}" alt="" style="margin-top: 15px; border-radius: 15px;">
+        </div>
+        {%if out=='Diseased'%}
+        <div class="lumpy-info">
+            <div style="display: flex; justify-content: center;">
+                <h1>This Cow Has Lumpy skin Disease!!!</h1>
+            </div>
+            <div>
+                <ul>
+                    <li>Lumpy skin disease (LSD) is a viral disease that affects cattle, causing the development of nodules or lumps on the skin.</li>
+                    <li>It is transmitted through direct contact with infected animals or insect vectors.</li>
+                    <li>LSD can result in reduced milk production, weight loss, and decreased fertility in cattle. </li>
+                </ul>
+                <h3>Solution</h3>
+                <ul>
+                    <li>There's no medicine to this disease, isolate the cattle and give painkillers</li>
+                    <li>In order to not transmit the disease to other cattles, vaccinate all the cattles</li>
+                    <li>For information</li>
+                    <li>
+                        <a href="https://www.msdvetmanual.com/integumentary-system/pox-diseases/lumpy-skin-disease-in-cattle">Veternary manual</a>
+                    </li>
+                    <li><a href="https://www.agriculture.gov.au/biosecurity-trade/pests-diseases-weeds/animal/lumpy-skin-disease">Governement website</a></li>
+                </ul>
+            </div>
+        </div>
+        {% endif %} {% if out == "Normal" %}
+        <div class="lumpy-info">
+            <div style="display: flex; justify-content: center;">
+                <h1>Your cow has No lumpy skin Disease</h1>
+            </div>
+            <ul>
+                <li>For Prevention Vaccinate the cow at the earliest</li>
+            </ul>
+        </div>
+        {% endif %} {% endif %}
+    </div>
+</body>
+
+</html>
